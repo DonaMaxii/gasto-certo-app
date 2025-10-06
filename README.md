@@ -16,3 +16,6 @@ Software desenvovido por Maxine "DonaMaxii" Santos e Rafael Oliveira.
 
 ## Lista de Distribuição
 
+    Adilson Ferreira da Silva - Professor
+    Humberto Luis de Toledo - Professor
+    Michele Viny dos Santos - Usuária
