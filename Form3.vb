@@ -1,48 +1,75 @@
-﻿Public Class form_cadastro
-    Private senha_visivel As Boolean = False
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+﻿Public Class form_tela_princ_prot
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btn_orcamento.Click
+        Me.Close()
+        Form4.Show()
+    End Sub
+
+    Private Sub btn_voltar_Click(sender As Object, e As EventArgs)
+        Me.Close()
         Form1.Show()
-        Close()
-
     End Sub
 
-    Private Sub visualizar_Click(sender As Object, e As EventArgs) Handles visualizar.Click
-        If senha_visivel Then ' Se senha_visivel então True, significa que o olho está aberto
-            txt_senha.PasswordChar = "*"c ' Colocar os asteriscos
-            txt_confirmar_senha.PasswordChar = "*"c
-            visualizar.Image = My.Resources.ocultar_senha ' Mudar a imagem para ocultar_senha
-            senha_visivel = False ' Atribuir false na variavel senha_visivel, significa que senha não é mais visivel e na proxima vez ira para o else
+    Private Sub form_tela_princ_prot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim hora_atual As DateTime = DateTime.Now ' Pega a hora atual do sistema
+        nome_user.Text = usuario_logado ' Exibe o nome do usuário logado no label "nome_user"
+        usuario.Text = usuario_logado ' Exibe o nome do usuário logado no label "usuario"
+        txt_hora_atual.Text = hora_atual.ToString("HH:mm") ' Exibe a hora atual no label "txt_hora_atual" no formato HH:mm
+        Dim hora_saudacao As Integer = hora_atual.Hour ' Pega a hora atual em formato inteiro
+        If hora_saudacao >= 0 And hora_saudacao < 12 Then
+            txt_saudacao.Text = "Bom dia" ' Exibe "Bom dia," se a hora estiver entre 0 e 11
+        ElseIf hora_saudacao >= 12 And hora_saudacao < 18 Then
+            txt_saudacao.Text = "Boa tarde" ' Exibe "Boa tarde," se a hora estiver entre 12 e 17
         Else
-            txt_confirmar_senha.PasswordChar = ControlChars.NullChar 'Tira os * e deixa a senha visivel
-            txt_senha.PasswordChar = ControlChars.NullChar
-            visualizar.Image = My.Resources.mostrar_senha
-            senha_visivel = True
+            txt_saudacao.Text = "Boa noite" ' Exibe "Boa noite," se a hora estiver entre 18 e 23
+        End If
+        sql = "SELECT * FROM usuarios"
+        rs = db.Execute(sql)
+        cont = 0
+        If rs.EOF = False Then
+            Do While Not rs.EOF
+                cont += 1
+                rs.MoveNext()
+            Loop
+        End If
+        txt_qtd_usuarios.Text = cont ' Exibe a quantidade de usuários cadastrados no label "txt_qtd_usuarios"
+    End Sub
+
+    Private Sub btn_sair_Click(sender As Object, e As EventArgs) Handles btn_sair.Click
+        resp = MsgBox("Desejá realmente sair do programa?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "ALERTA")
+        If resp = vbYes Then
+            Form1.Close()
+        Else
         End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        If String.IsNullOrEmpty(txt_usuario.Text) OrElse String.IsNullOrEmpty(txt_senha.Text) OrElse String.IsNullOrEmpty(txt_confirmar_senha.Text) Then
-            MsgBox("Preencha todos os campos!", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "AVISO")
+    Private Sub Label5_Click(sender As Object, e As EventArgs) Handles usuario.Click
+
+    End Sub
+
+    Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
+        resp = MsgBox("Desejá realmente sair da sua conta?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "ALERTA")
+        If resp = vbYes Then
+            Me.Close()
+            Form1.Show()
         Else
-            If txt_senha.Text = txt_confirmar_senha.Text Then
-                Try
-                    sql = $"select * from usuarios where usuario='{txt_usuario.Text}'"
-                    rs = db.Execute(sql)
-                    If rs.EOF = False Then ' Se existir na tabela
-                        MsgBox("Usuário já cadastrado!", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "AVISO")
-                    Else
-                        sql = $"insert into usuarios (usuario,senha) values ('{txt_usuario.Text}','{txt_senha.Text}')"
-                        rs = db.Execute(UCase(sql))
-                        MsgBox("Usuário cadastrado com sucesso!", MsgBoxStyle.Information + vbOKOnly, "AVISO")
-                    End If
-
-                Catch ex As Exception
-
-                End Try
-            Else
-                MsgBox("Senhas diferentes!", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "ALERTA")
-            End If
         End If
+    End Sub
+
+    Private Sub btn_doc_anteriores_Click(sender As Object, e As EventArgs) Handles btn_doc_anteriores.Click
+        Me.Close()
+        form_doc_anteriores.Show()
+    End Sub
+
+    Private Sub Label6_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub form_tela_princ_prot_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
+        Form1.Close()
 
     End Sub
 End Class
