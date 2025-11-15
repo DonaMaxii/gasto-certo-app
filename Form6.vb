@@ -56,6 +56,44 @@
     End Sub
 
     Private Sub form_tipo_orcamento_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' img_simbolo.Text = "▲" ' Carrega o símbolo de alerta
+        Try
+            receita = 0
+            sql = $"SELECT SUM(valor) AS total FROM orcamentos WHERE usuario='{usuario_logado}' AND mes='{mes}' AND ano='{ano}' AND tipo='Receita'"
+            rs = db.Execute(sql)
+            If Not rs.EOF And Not IsDBNull(rs.Fields("total").Value) Then ' Verifica se o recordset não está vazio e se o valor não é nulo
+                receita = Convert.ToDecimal(rs.Fields("total").Value) ' Converte o valor para decimal e atribui à variável receita
+            End If
+        Catch ex As Exception
+            MsgBox("Erro ao calcular receita!", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "AVISO")
+        End Try
+
+        Try
+            despesa = 0
+            sql = $"SELECT SUM(valor) AS total FROM orcamentos WHERE usuario='{usuario_logado}' AND mes='{mes}' AND ano='{ano}' AND tipo='Gasto'" ' Consulta SQL para somar os valores dos gastos
+            rs = db.Execute(sql)
+            If Not rs.EOF And Not IsDBNull(rs.Fields("total").Value) Then ' Verifica se o recordset não está vazio e se o valor não é nulo
+                despesa = Convert.ToDecimal(rs.Fields("total").Value) ' Converte o valor para decimal e atribui à variável despesa
+            End If
+        Catch ex As Exception
+            MsgBox("Erro ao calcular despesa!", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "AVISO")
+        End Try
+
+        calc_receita_despesa = receita - despesa
+        If calc_receita_despesa < 0 Then
+            txt_valor.ForeColor = Color.Red ' Define a cor do texto como vermelho para valores negativos
+        Else
+            txt_valor.ForeColor = Color.Green ' Define a cor do texto como verde para valores positivos
+        End If
+        txt_valor.Text = $"R$ {calc_receita_despesa.ToString("F2")}" ' Formata o valor com duas casas decimais e atribui ao TextBox
+
+        If calc_receita_despesa < 0 Then
+            img_simbolo.Text = "▼ Negativo"
+            img_simbolo.ForeColor = Color.Red
+        Else
+            img_simbolo.Text = "▲ Positivo"
+            img_simbolo.ForeColor = Color.Green
+        End If
 
     End Sub
 End Class

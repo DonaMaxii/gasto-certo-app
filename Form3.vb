@@ -68,8 +68,7 @@
 
     End Sub
 
-    Private Sub form_tela_princ_prot_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
-        Form1.Close()
+    Private Sub btn_inicio_Click(sender As Object, e As EventArgs) Handles btn_inicio.Click
 
     End Sub
 End Class

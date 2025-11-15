@@ -41,6 +41,10 @@ Partial Class form_tipo_orcamento
         Me.btn_finalizar = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.GunaLabel1 = New Guna.UI.WinForms.GunaLabel()
+        Me.txt_valor = New Guna.UI.WinForms.GunaLabel()
+        Me.img_simbolo = New Guna.UI.WinForms.GunaLabel()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -48,6 +52,7 @@ Partial Class form_tipo_orcamento
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel4.SuspendLayout()
+        Me.Panel5.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -163,6 +168,7 @@ Partial Class form_tipo_orcamento
         'Panel2
         '
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.Panel5)
         Me.Panel2.Controls.Add(Me.btn_voltar)
         Me.Panel2.Controls.Add(Me.Button1)
         Me.Panel2.Controls.Add(Me.btn_inserir_receitas)
@@ -273,6 +279,48 @@ Partial Class form_tipo_orcamento
         Me.Panel4.Size = New System.Drawing.Size(1235, 80)
         Me.Panel4.TabIndex = 40
         '
+        'Panel5
+        '
+        Me.Panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel5.Controls.Add(Me.img_simbolo)
+        Me.Panel5.Controls.Add(Me.txt_valor)
+        Me.Panel5.Controls.Add(Me.GunaLabel1)
+        Me.Panel5.Location = New System.Drawing.Point(463, 46)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(143, 131)
+        Me.Panel5.TabIndex = 36
+        '
+        'GunaLabel1
+        '
+        Me.GunaLabel1.AutoSize = True
+        Me.GunaLabel1.Font = New System.Drawing.Font("Franklin Gothic Medium Cond", 12.0!)
+        Me.GunaLabel1.ForeColor = System.Drawing.Color.Black
+        Me.GunaLabel1.Location = New System.Drawing.Point(8, 37)
+        Me.GunaLabel1.Name = "GunaLabel1"
+        Me.GunaLabel1.Size = New System.Drawing.Size(50, 21)
+        Me.GunaLabel1.TabIndex = 0
+        Me.GunaLabel1.Text = "TOTAL:"
+        '
+        'txt_valor
+        '
+        Me.txt_valor.AutoSize = True
+        Me.txt_valor.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txt_valor.Location = New System.Drawing.Point(54, 36)
+        Me.txt_valor.Name = "txt_valor"
+        Me.txt_valor.Size = New System.Drawing.Size(58, 21)
+        Me.txt_valor.TabIndex = 1
+        Me.txt_valor.Text = "VALOR"
+        '
+        'img_simbolo
+        '
+        Me.img_simbolo.AutoSize = True
+        Me.img_simbolo.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.img_simbolo.Location = New System.Drawing.Point(9, 73)
+        Me.img_simbolo.Name = "img_simbolo"
+        Me.img_simbolo.Size = New System.Drawing.Size(71, 20)
+        Me.img_simbolo.TabIndex = 2
+        Me.img_simbolo.Text = "SIMBOLO"
+        '
         'form_tipo_orcamento
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -296,6 +344,8 @@ Partial Class form_tipo_orcamento
         Me.Panel3.PerformLayout()
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
+        Me.Panel5.ResumeLayout(False)
+        Me.Panel5.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -319,4 +369,8 @@ Partial Class form_tipo_orcamento
     Friend WithEvents btn_inserir_receitas As Button
     Friend WithEvents btn_voltar As Button
     Friend WithEvents Panel4 As Panel
+    Friend WithEvents Panel5 As Panel
+    Friend WithEvents img_simbolo As Guna.UI.WinForms.GunaLabel
+    Friend WithEvents txt_valor As Guna.UI.WinForms.GunaLabel
+    Friend WithEvents GunaLabel1 As Guna.UI.WinForms.GunaLabel
 End Class

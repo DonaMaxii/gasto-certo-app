@@ -137,7 +137,22 @@ Public Class form_doc_anteriores
             "Novembro",
             "Dezembro"
             }
-
+        Dim tipo_gasto As New List(Of String) From {
+            "Alimentação",
+            "Transporte",
+            "Saúde",
+            "Educação",
+            "Lazer",
+            "Moradia",
+            "Outros"
+            }
+        Dim tipo_receita As New List(Of String) From {
+            "Salário",
+            "Freelance",
+            "Investimentos",
+            "Presente",
+            "Outros Rendimentos"
+            }
         If dtg_orc.CurrentCell.OwningColumn.Name <> "id" Then
             MsgBox("Selecione a coluna ID para gravar as alterações.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "ATENÇÃO")
             Exit Sub
@@ -154,6 +169,17 @@ Public Class form_doc_anteriores
             exibir_dados() ' Recarrega os dados originais
             Exit Sub
         End If
+        If dtg_orc.CurrentRow.Cells("tipo").Value.ToString() <> "Receita" AndAlso dtg_orc.CurrentRow.Cells("tipo").Value.ToString() <> "Gasto" Then
+            MsgBox("Tipo inválido. Por favor, insira 'Receita' ou 'Gasto'.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "ATENÇÃO")
+            exibir_dados() ' Recarrega os dados originais
+            Exit Sub
+        End If
+        If tipo_gasto.Contains(dtg_orc.CurrentRow.Cells("sub_tipo").Value.ToString()) = False AndAlso tipo_receita.Contains(dtg_orc.CurrentRow.Cells("sub_tipo").Value.ToString()) = False Then
+            MsgBox("Subtipo inválido. Por favor, insira um subtipo válido.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "ATENÇÃO")
+            exibir_dados() ' Recarrega os dados originais
+            Exit Sub
+        End If
+
         sql = $"update orcamentos set usuario='{dtg_orc.CurrentRow.Cells("usuario").Value}', mes='{dtg_orc.CurrentRow.Cells("mes").Value}', ano='{dtg_orc.CurrentRow.Cells("ano").Value}', tipo='{dtg_orc.CurrentRow.Cells("tipo").Value}', sub_tipo='{dtg_orc.CurrentRow.Cells("sub_tipo").Value}', descricao='{dtg_orc.CurrentRow.Cells("descricao").Value}', valor='{dtg_orc.CurrentRow.Cells("valor").Value}' where id={dtg_orc.CurrentRow.Cells("id").Value}"
         rs = db.Execute(sql)
         MsgBox("Alterações gravadas com sucesso!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "AVISO")

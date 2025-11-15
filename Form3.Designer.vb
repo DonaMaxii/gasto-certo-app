@@ -38,22 +38,22 @@ Partial Class form_tela_princ_prot
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.txt_saudacao = New System.Windows.Forms.Label()
+        Me.txt_hora_atual = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.txt_qtd_usuarios = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.txt_hora_atual = New System.Windows.Forms.Label()
-        Me.txt_saudacao = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
-        Me.Panel3.SuspendLayout()
         Me.Panel4.SuspendLayout()
+        Me.Panel3.SuspendLayout()
         Me.SuspendLayout()
         '
         'btn_orcamento
@@ -236,6 +236,48 @@ Partial Class form_tela_princ_prot
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(487, 137)
         Me.TableLayoutPanel1.TabIndex = 33
         '
+        'Panel4
+        '
+        Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel4.Controls.Add(Me.txt_saudacao)
+        Me.Panel4.Controls.Add(Me.txt_hora_atual)
+        Me.Panel4.Controls.Add(Me.Label6)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel4.Location = New System.Drawing.Point(247, 4)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(236, 129)
+        Me.Panel4.TabIndex = 1
+        '
+        'txt_saudacao
+        '
+        Me.txt_saudacao.AutoSize = True
+        Me.txt_saudacao.Font = New System.Drawing.Font("Franklin Gothic Medium Cond", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txt_saudacao.Location = New System.Drawing.Point(76, 90)
+        Me.txt_saudacao.Name = "txt_saudacao"
+        Me.txt_saudacao.Size = New System.Drawing.Size(92, 26)
+        Me.txt_saudacao.TabIndex = 3
+        Me.txt_saudacao.Text = "Saudação"
+        '
+        'txt_hora_atual
+        '
+        Me.txt_hora_atual.AutoSize = True
+        Me.txt_hora_atual.Font = New System.Drawing.Font("Franklin Gothic Medium Cond", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txt_hora_atual.Location = New System.Drawing.Point(88, 54)
+        Me.txt_hora_atual.Name = "txt_hora_atual"
+        Me.txt_hora_atual.Size = New System.Drawing.Size(94, 26)
+        Me.txt_hora_atual.TabIndex = 2
+        Me.txt_hora_atual.Text = "Hora Atual"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Franklin Gothic Medium Cond", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(69, 17)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(99, 26)
+        Me.Label6.TabIndex = 1
+        Me.Label6.Text = "Hora Atual:"
+        '
         'Panel3
         '
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -277,48 +319,6 @@ Partial Class form_tela_princ_prot
         Me.Label5.TabIndex = 34
         Me.Label5.Text = "Gerêncie suas finâncias de forma simplificada"
         '
-        'Panel4
-        '
-        Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel4.Controls.Add(Me.txt_saudacao)
-        Me.Panel4.Controls.Add(Me.txt_hora_atual)
-        Me.Panel4.Controls.Add(Me.Label6)
-        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(247, 4)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(236, 129)
-        Me.Panel4.TabIndex = 1
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Franklin Gothic Medium Cond", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(69, 17)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(99, 26)
-        Me.Label6.TabIndex = 1
-        Me.Label6.Text = "Hora Atual:"
-        '
-        'txt_hora_atual
-        '
-        Me.txt_hora_atual.AutoSize = True
-        Me.txt_hora_atual.Font = New System.Drawing.Font("Franklin Gothic Medium Cond", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt_hora_atual.Location = New System.Drawing.Point(88, 54)
-        Me.txt_hora_atual.Name = "txt_hora_atual"
-        Me.txt_hora_atual.Size = New System.Drawing.Size(94, 26)
-        Me.txt_hora_atual.TabIndex = 2
-        Me.txt_hora_atual.Text = "Hora Atual"
-        '
-        'txt_saudacao
-        '
-        Me.txt_saudacao.AutoSize = True
-        Me.txt_saudacao.Font = New System.Drawing.Font("Franklin Gothic Medium Cond", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt_saudacao.Location = New System.Drawing.Point(76, 90)
-        Me.txt_saudacao.Name = "txt_saudacao"
-        Me.txt_saudacao.Size = New System.Drawing.Size(92, 26)
-        Me.txt_saudacao.TabIndex = 3
-        Me.txt_saudacao.Text = "Saudação"
-        '
         'form_tela_princ_prot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -345,10 +345,10 @@ Partial Class form_tela_princ_prot
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.TableLayoutPanel1.ResumeLayout(False)
-        Me.Panel3.ResumeLayout(False)
-        Me.Panel3.PerformLayout()
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

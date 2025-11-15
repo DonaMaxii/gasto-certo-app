@@ -76,7 +76,22 @@
             "Novembro",
             "Dezembro"
             }
-
+        Dim tipo_gasto As New List(Of String) From {
+            "Alimentação",
+            "Transporte",
+            "Saúde",
+            "Educação",
+            "Lazer",
+            "Moradia",
+            "Outros"
+            }
+        Dim tipo_receita As New List(Of String) From {
+            "Salário",
+            "Freelance",
+            "Investimentos",
+            "Presente",
+            "Outros Rendimentos"
+            }
         If dtg_orc_data.CurrentCell.OwningColumn.Name <> "id" Then
             MsgBox("Selecione a coluna ID para gravar as alterações.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "ATENÇÃO")
             Exit Sub
@@ -90,6 +105,16 @@
         End If
         If Not IsNumeric(dtg_orc_data.CurrentRow.Cells("ano").Value) OrElse CInt(dtg_orc_data.CurrentRow.Cells("ano").Value) < 1900 OrElse CInt(dtg_orc_data.CurrentRow.Cells("ano").Value) > DateTime.Now.Year Then
             MsgBox("Ano inválido. Por favor, insira um ano válido entre 2015 e o ano atual.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "ATENÇÃO")
+            exibir_dados() ' Recarrega os dados originais
+            Exit Sub
+        End If
+        If dtg_orc_data.CurrentRow.Cells("tipo").Value.ToString() <> "Receita" AndAlso dtg_orc_data.CurrentRow.Cells("tipo").Value.ToString() <> "Gasto" Then
+            MsgBox("Tipo inválido. Por favor, insira 'Receita' ou 'Gasto'.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "ATENÇÃO")
+            exibir_dados() ' Recarrega os dados originais
+            Exit Sub
+        End If
+        If tipo_gasto.Contains(dtg_orc_data.CurrentRow.Cells("sub_tipo").Value.ToString()) = False AndAlso tipo_receita.Contains(dtg_orc_data.CurrentRow.Cells("sub_tipo").Value.ToString()) = False Then
+            MsgBox("Subtipo inválido. Por favor, insira um subtipo válido.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "ATENÇÃO")
             exibir_dados() ' Recarrega os dados originais
             Exit Sub
         End If
