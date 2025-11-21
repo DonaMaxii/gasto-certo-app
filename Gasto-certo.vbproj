@@ -14,6 +14,21 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -77,90 +92,60 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form3.Designer.vb">
-      <DependentUpon>Form3.vb</DependentUpon>
+    <Compile Include="frm_novo_orcamento.Designer.vb">
+      <DependentUpon>frm_novo_orcamento.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form3.vb">
+    <Compile Include="frm_novo_orcamento.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form4.Designer.vb">
-      <DependentUpon>Form4.vb</DependentUpon>
+    <Compile Include="frm_docs_anteriores.Designer.vb">
+      <DependentUpon>frm_docs_anteriores.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form4.vb">
+    <Compile Include="frm_docs_anteriores.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form5.Designer.vb">
-      <DependentUpon>Form5.vb</DependentUpon>
+    <Compile Include="frm_novo_orcamento_tipo.Designer.vb">
+      <DependentUpon>frm_novo_orcamento_tipo.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form5.vb">
+    <Compile Include="frm_novo_orcamento_tipo.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form6.Designer.vb">
-      <DependentUpon>Form6.vb</DependentUpon>
+    <Compile Include="frm_nova_receita.Designer.vb">
+      <DependentUpon>frm_nova_receita.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form6.vb">
+    <Compile Include="frm_nova_receita.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form7.Designer.vb">
-      <DependentUpon>Form7.vb</DependentUpon>
+    <Compile Include="frm_nova_despesa.Designer.vb">
+      <DependentUpon>frm_nova_despesa.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form7.vb">
+    <Compile Include="frm_nova_despesa.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form8.Designer.vb">
-      <DependentUpon>Form8.vb</DependentUpon>
+    <Compile Include="form_buscar_data.Designer.vb">
+      <DependentUpon>form_buscar_data.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form8.vb">
+    <Compile Include="form_buscar_data.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form9.Designer.vb">
-      <DependentUpon>Form9.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form9.vb">
+    <Compile Include="frm_login.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form_orc_datas.Designer.vb">
-      <DependentUpon>form_orc_datas.vb</DependentUpon>
-    </Compile>
-    <Compile Include="form_orc_datas.vb">
+    <Compile Include="frm_login.Designer.vb">
+      <DependentUpon>frm_login.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="login.vb">
-      <SubType>Form</SubType>
+    <Compile Include="frm_cadastro.Designer.vb">
+      <DependentUpon>frm_cadastro.vb</DependentUpon>
     </Compile>
-    <Compile Include="login.Designer.vb">
-      <DependentUpon>login.vb</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form2.Designer.vb">
-      <DependentUpon>Form2.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form2.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Cadastro.Designer.vb">
-      <DependentUpon>Cadastro.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Cadastro.vb">
+    <Compile Include="frm_cadastro.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Module1.vb" />
-    <Compile Include="orçamento.Designer.vb">
-      <DependentUpon>orçamento.vb</DependentUpon>
+    <Compile Include="frm_tela_principal.Designer.vb">
+      <DependentUpon>frm_tela_principal.vb</DependentUpon>
     </Compile>
-    <Compile Include="orçamento.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="relatorio.Designer.vb">
-      <DependentUpon>relatorio.vb</DependentUpon>
-    </Compile>
-    <Compile Include="relatorio.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="tela_principal.Designer.vb">
-      <DependentUpon>tela_principal.vb</DependentUpon>
-    </Compile>
-    <Compile Include="tela_principal.vb">
+    <Compile Include="frm_tela_principal.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -181,47 +166,32 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form3.resx">
-      <DependentUpon>Form3.vb</DependentUpon>
+    <EmbeddedResource Include="frm_novo_orcamento.resx">
+      <DependentUpon>frm_novo_orcamento.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form4.resx">
-      <DependentUpon>Form4.vb</DependentUpon>
+    <EmbeddedResource Include="frm_docs_anteriores.resx">
+      <DependentUpon>frm_docs_anteriores.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form5.resx">
-      <DependentUpon>Form5.vb</DependentUpon>
+    <EmbeddedResource Include="frm_novo_orcamento_tipo.resx">
+      <DependentUpon>frm_novo_orcamento_tipo.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form6.resx">
-      <DependentUpon>Form6.vb</DependentUpon>
+    <EmbeddedResource Include="frm_nova_receita.resx">
+      <DependentUpon>frm_nova_receita.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form7.resx">
-      <DependentUpon>Form7.vb</DependentUpon>
+    <EmbeddedResource Include="frm_nova_despesa.resx">
+      <DependentUpon>frm_nova_despesa.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form8.resx">
-      <DependentUpon>Form8.vb</DependentUpon>
+    <EmbeddedResource Include="form_buscar_data.resx">
+      <DependentUpon>form_buscar_data.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form9.resx">
-      <DependentUpon>Form9.vb</DependentUpon>
+    <EmbeddedResource Include="frm_login.resx">
+      <DependentUpon>frm_login.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form_orc_datas.resx">
-      <DependentUpon>form_orc_datas.vb</DependentUpon>
+    <EmbeddedResource Include="frm_cadastro.resx">
+      <DependentUpon>frm_cadastro.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="login.resx">
-      <DependentUpon>login.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form2.resx">
-      <DependentUpon>Form2.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Cadastro.resx">
-      <DependentUpon>Cadastro.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="orçamento.resx">
-      <DependentUpon>orçamento.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="relatorio.resx">
-      <DependentUpon>relatorio.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="tela_principal.resx">
-      <DependentUpon>tela_principal.vb</DependentUpon>
+    <EmbeddedResource Include="frm_tela_principal.resx">
+      <DependentUpon>frm_tela_principal.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -315,6 +285,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8-close-window-30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
