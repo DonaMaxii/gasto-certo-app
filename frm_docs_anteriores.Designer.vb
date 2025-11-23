@@ -22,14 +22,14 @@ Partial Class frm_docs_anteriores
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_docs_anteriores))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btn_exibir_registros = New System.Windows.Forms.Button()
@@ -51,11 +51,18 @@ Partial Class frm_docs_anteriores
         Me.btn_gravar = New System.Windows.Forms.Button()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.GunaLinePanel1 = New Guna.UI.WinForms.GunaLinePanel()
+        Me.GunaLabel1 = New Guna.UI.WinForms.GunaLabel()
+        Me.txt_valor = New Guna.UI.WinForms.GunaLabel()
+        Me.img_simbolo = New Guna.UI.WinForms.GunaLabel()
+        Me.cmb_selecao_receita_despesa = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         CType(Me.dtg_orc, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GunaLinePanel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -144,9 +151,9 @@ Partial Class frm_docs_anteriores
         '
         'id
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
-        Me.id.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black
+        Me.id.DefaultCellStyle = DataGridViewCellStyle17
         Me.id.HeaderText = "ID"
         Me.id.MinimumWidth = 6
         Me.id.Name = "id"
@@ -154,8 +161,8 @@ Partial Class frm_docs_anteriores
         '
         'usuario
         '
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.usuario.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.usuario.DefaultCellStyle = DataGridViewCellStyle18
         Me.usuario.HeaderText = "USUÁRIO"
         Me.usuario.MinimumWidth = 6
         Me.usuario.Name = "usuario"
@@ -163,8 +170,8 @@ Partial Class frm_docs_anteriores
         '
         'mes
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.mes.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.mes.DefaultCellStyle = DataGridViewCellStyle19
         Me.mes.HeaderText = "MÊS"
         Me.mes.MinimumWidth = 6
         Me.mes.Name = "mes"
@@ -172,8 +179,8 @@ Partial Class frm_docs_anteriores
         '
         'ano
         '
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.ano.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.ano.DefaultCellStyle = DataGridViewCellStyle20
         Me.ano.HeaderText = "ANO"
         Me.ano.MinimumWidth = 6
         Me.ano.Name = "ano"
@@ -181,8 +188,8 @@ Partial Class frm_docs_anteriores
         '
         'tipo
         '
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.tipo.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.tipo.DefaultCellStyle = DataGridViewCellStyle21
         Me.tipo.HeaderText = "TIPO"
         Me.tipo.MinimumWidth = 6
         Me.tipo.Name = "tipo"
@@ -190,8 +197,8 @@ Partial Class frm_docs_anteriores
         '
         'sub_tipo
         '
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.sub_tipo.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.sub_tipo.DefaultCellStyle = DataGridViewCellStyle22
         Me.sub_tipo.HeaderText = "SUB TIPO"
         Me.sub_tipo.MinimumWidth = 6
         Me.sub_tipo.Name = "sub_tipo"
@@ -199,9 +206,9 @@ Partial Class frm_docs_anteriores
         '
         'descricao
         '
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
-        Me.descricao.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle23.ForeColor = System.Drawing.Color.Black
+        Me.descricao.DefaultCellStyle = DataGridViewCellStyle23
         Me.descricao.HeaderText = "DESCRIÇÃO"
         Me.descricao.MinimumWidth = 6
         Me.descricao.Name = "descricao"
@@ -209,8 +216,8 @@ Partial Class frm_docs_anteriores
         '
         'valor
         '
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.valor.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.valor.DefaultCellStyle = DataGridViewCellStyle24
         Me.valor.HeaderText = "VALOR"
         Me.valor.MinimumWidth = 6
         Me.valor.Name = "valor"
@@ -305,12 +312,82 @@ Partial Class frm_docs_anteriores
         Me.PictureBox2.TabIndex = 55
         Me.PictureBox2.TabStop = False
         '
+        'GunaLinePanel1
+        '
+        Me.GunaLinePanel1.Controls.Add(Me.GunaLabel1)
+        Me.GunaLinePanel1.Controls.Add(Me.txt_valor)
+        Me.GunaLinePanel1.Controls.Add(Me.img_simbolo)
+        Me.GunaLinePanel1.LineBottom = 2
+        Me.GunaLinePanel1.LineColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.GunaLinePanel1.LineLeft = 2
+        Me.GunaLinePanel1.LineRight = 2
+        Me.GunaLinePanel1.LineStyle = System.Windows.Forms.BorderStyle.None
+        Me.GunaLinePanel1.LineTop = 2
+        Me.GunaLinePanel1.Location = New System.Drawing.Point(443, 558)
+        Me.GunaLinePanel1.Name = "GunaLinePanel1"
+        Me.GunaLinePanel1.Size = New System.Drawing.Size(338, 81)
+        Me.GunaLinePanel1.TabIndex = 57
+        '
+        'GunaLabel1
+        '
+        Me.GunaLabel1.AutoSize = True
+        Me.GunaLabel1.Font = New System.Drawing.Font("Franklin Gothic Medium", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GunaLabel1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(65, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(88, Byte), Integer))
+        Me.GunaLabel1.Location = New System.Drawing.Point(54, 25)
+        Me.GunaLabel1.Name = "GunaLabel1"
+        Me.GunaLabel1.Size = New System.Drawing.Size(94, 34)
+        Me.GunaLabel1.TabIndex = 0
+        Me.GunaLabel1.Text = "TOTAL:"
+        '
+        'txt_valor
+        '
+        Me.txt_valor.AutoSize = True
+        Me.txt_valor.Font = New System.Drawing.Font("Franklin Gothic Heavy", 20.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txt_valor.Location = New System.Drawing.Point(158, 25)
+        Me.txt_valor.Name = "txt_valor"
+        Me.txt_valor.Size = New System.Drawing.Size(175, 34)
+        Me.txt_valor.TabIndex = 1
+        Me.txt_valor.Text = "R$ 00000,00"
+        Me.txt_valor.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'img_simbolo
+        '
+        Me.img_simbolo.AutoSize = True
+        Me.img_simbolo.Font = New System.Drawing.Font("Franklin Gothic Demi", 26.0!)
+        Me.img_simbolo.Location = New System.Drawing.Point(12, 20)
+        Me.img_simbolo.Name = "img_simbolo"
+        Me.img_simbolo.Size = New System.Drawing.Size(38, 41)
+        Me.img_simbolo.TabIndex = 2
+        Me.img_simbolo.Text = "S"
+        '
+        'cmb_selecao_receita_despesa
+        '
+        Me.cmb_selecao_receita_despesa.Font = New System.Drawing.Font("Franklin Gothic Medium Cond", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmb_selecao_receita_despesa.FormattingEnabled = True
+        Me.cmb_selecao_receita_despesa.Location = New System.Drawing.Point(273, 578)
+        Me.cmb_selecao_receita_despesa.Name = "cmb_selecao_receita_despesa"
+        Me.cmb_selecao_receita_despesa.Size = New System.Drawing.Size(154, 29)
+        Me.cmb_selecao_receita_despesa.TabIndex = 58
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(270, 555)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(126, 20)
+        Me.Label3.TabIndex = 59
+        Me.Label3.Text = "Escolha um tipo:"
+        '
         'frm_docs_anteriores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1224, 681)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.cmb_selecao_receita_despesa)
+        Me.Controls.Add(Me.GunaLinePanel1)
         Me.Controls.Add(Me.dtg_orc)
         Me.Controls.Add(Me.btn_gravar)
         Me.Controls.Add(Me.btn_voltar)
@@ -329,6 +406,8 @@ Partial Class frm_docs_anteriores
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GunaLinePanel1.ResumeLayout(False)
+        Me.GunaLinePanel1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -354,4 +433,10 @@ Partial Class frm_docs_anteriores
     Friend WithEvents PictureBox3 As PictureBox
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents Label2 As Label
+    Friend WithEvents GunaLinePanel1 As Guna.UI.WinForms.GunaLinePanel
+    Friend WithEvents GunaLabel1 As Guna.UI.WinForms.GunaLabel
+    Friend WithEvents txt_valor As Guna.UI.WinForms.GunaLabel
+    Friend WithEvents img_simbolo As Guna.UI.WinForms.GunaLabel
+    Friend WithEvents cmb_selecao_receita_despesa As ComboBox
+    Friend WithEvents Label3 As Label
 End Class

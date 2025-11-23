@@ -1,7 +1,9 @@
 ﻿Public Class frm_novo_orcamento
+    Private fecharPorBotao As Boolean = False ' Variável para controlar se o formulário foi fechado por um botão específico
     Private Sub btn_voltar_Click(sender As Object, e As EventArgs)
-        Me.Close()
+        fecharPorBotao = True
         frm_tela_principal.Show()
+        Me.Close()
     End Sub
 
 
@@ -36,15 +38,17 @@
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs)
         resp = MsgBox("Desejá realmente sair da sua conta?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "ALERTA")
         If resp = vbYes Then
-            Me.Close()
+            fecharPorBotao = True
             frm_login.Show()
+            Me.Close()
         Else
         End If
     End Sub
 
     Private Sub btn_inicio_Click(sender As Object, e As EventArgs) Handles btn_inicio.Click
-        Me.Close()
+        fecharPorBotao = True
         frm_tela_principal.Show()
+        Me.Close()
     End Sub
 
     Private Sub btn_doc_anteriores_Click(sender As Object, e As EventArgs) Handles btn_doc_anteriores.Click
@@ -68,18 +72,17 @@
         mes = cmb_meses.Text ' Armazena o mês selecionado na variável global "mes"
         ano = cmb_ano.Text ' Armazena o ano selecionado na variável global "ano"
         ano = CInt(ano) ' Converte o ano para inteiro
-        Me.Close()
+        fecharPorBotao = True
         frm_novo_orcamento_tipo.Show()
+        Me.Close()
     End Sub
 
     Private Sub frm_novo_orcamento_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
-        If btn_inicio.Focused Then
-            ' Fechar para o formulário inicial
-        ElseIf btn_proximo.Focused Then
-            ' Fechar para o próximo formulário
+        If fecharPorBotao Then
+            ' Não faz nada, apenas fecha o formulário
         Else
+            MsgBox("Encerrando o aplicativo.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "AVISO")
             Application.Exit()
         End If
-
     End Sub
 End Class

@@ -14,7 +14,7 @@ Public Class frm_tela_principal
     Private StepY As Single = 0.05F
     Private alphaStep As Single = 0.05F
     Private logo As Image
-
+    Private fecharPorBotao As Boolean = False ' Variável para controlar se o formulário foi fechado por um botão específico
 
 
     Public Sub New()
@@ -98,13 +98,16 @@ Public Class frm_tela_principal
     End Sub
 
     Private Sub btn_voltar_Click(sender As Object, e As EventArgs) Handles btn_voltar.Click
-        Me.Close()
+        fecharPorBotao = True
         frm_login.Show()
+        Me.Close()
     End Sub
 
     Private Sub btn_docs_anteriores_Click(sender As Object, e As EventArgs) Handles btn_docs_anteriores.Click
-        Me.Close()
+        fecharPorBotao = True
         frm_docs_anteriores.Show()
+        Me.Close()
+
     End Sub
 
     Private Sub btn_sair_Click(sender As Object, e As EventArgs) Handles btn_sair.Click
@@ -115,17 +118,17 @@ Public Class frm_tela_principal
     End Sub
 
     Private Sub btn_novo_orcamento_Click(sender As Object, e As EventArgs) Handles btn_novo_orcamento.Click
-        Me.Close()
+        fecharPorBotao = True
         frm_novo_orcamento.Show()
+        Me.Close()
     End Sub
 
     Private Sub frm_tela_principal_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
-        If btn_docs_anteriores.Focused Or btn_novo_orcamento.Focused Then
-            ' Não faz nada, pois outro formulário está sendo aberto
-        ElseIf btn_voltar.Focused Then
-            ' Não faz nada, pois o usuário está voltando ao login
+        If fecharPorBotao Then
+            ' Não faz nada, apenas fecha o formulário
         Else
-            Application.Exit()
+            MsgBox("Encerrando o aplicativo.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "AVISO")
+            Application.Exit() ' Fecha o aplicativo se o formulário for fechado por outros meios
         End If
     End Sub
 End Class

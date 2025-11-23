@@ -1,9 +1,11 @@
 ﻿Imports System.Reflection.Emit
 
 Public Class frm_nova_receita
+    Private fecharPorBotao As Boolean = False ' Variável para controlar se o formulário foi fechado por um botão específico
     Private Sub btn_voltar_Click(sender As Object, e As EventArgs) Handles btn_voltar.Click
-        Me.Close()
+        fecharPorBotao = True
         frm_novo_orcamento_tipo.Show()
+        Me.Close()
     End Sub
 
 
@@ -40,7 +42,7 @@ Public Class frm_nova_receita
         ToolTip1.SetToolTip(txt_valor_receita, "Informe o valor do lançamento, p.ex. R$ 1520,00")
         ToolTip1.SetToolTip(Label13, "Insira uma desscrição breve do lançamento, p. ex. 'Salário referente ao mês de agosto'.")
         ToolTip1.SetToolTip(txt_valor_descricao_receita, "Insira uma desscrição breve do lançamento, p. ex. 'Salário referente ao mês de agosto'.")
-
+        nome_user_global(lbl_usuario)
     End Sub
 
 
@@ -92,35 +94,32 @@ Public Class frm_nova_receita
 
             rs = db.Execute(sql)
             MsgBox("Receita registrada com sucesso!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "AVISO")
-            Me.Close()
+            fecharPorBotao = True
             frm_novo_orcamento_tipo.Show()
+            Me.Close()
         Catch ex As Exception
             MsgBox("Erro ao registrar a receita!", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "ALERTA")
         End Try
     End Sub
 
     Private Sub btn_doc_anteriores_Click(sender As Object, e As EventArgs) Handles btn_doc_anteriores.Click
-        Me.Close()
         frm_docs_anteriores.Show()
     End Sub
 
     Private Sub btn_inicio_Click(sender As Object, e As EventArgs) Handles btn_inicio.Click
-        Me.Close()
+        fecharPorBotao = True
         frm_tela_principal.Show()
+        Me.Close()
     End Sub
 
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs)
         resp = MsgBox("Desejá realmente sair da sua conta?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "ALERTA")
         If resp = vbYes Then
-            Me.Close()
+            fecharPorBotao = True
             frm_login.Show()
+            Me.Close()
         Else
         End If
-    End Sub
-
-
-    Private Sub txt_valor_receita_TextChanged(sender As Object, e As EventArgs) Handles txt_valor_receita.TextChanged
-
     End Sub
 
     Private Sub txt_valor_descricao_receita_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_valor_descricao_receita.KeyDown
@@ -128,11 +127,6 @@ Public Class frm_nova_receita
             btn_registrar.PerformClick()
         End If
     End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
     Private Sub txt_valor_receita_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_valor_receita.KeyDown
         If e.KeyCode = Keys.Enter Then
             txt_valor_descricao_receita.Focus()
@@ -140,14 +134,11 @@ Public Class frm_nova_receita
     End Sub
 
     Private Sub frm_nova_receita_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
-        If btn_doc_anteriores.Focused Or btn_inicio.Focused Then
-            ' Não faz nada, apenas fecha o formulário
-        ElseIf btn_orcamento.Focused Then
-            ' Não faz nada, apenas fecha o formulário
-        ElseIf btn_registrar.Focused Or btn_voltar.Focused Then
-            ' Não faz nada, apenas fecha o formulário
+        If fecharPorBotao Then
         Else
+            MsgBox("Encerrando o programa.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "AVISO")
             Application.Exit()
+
         End If
     End Sub
 End Class

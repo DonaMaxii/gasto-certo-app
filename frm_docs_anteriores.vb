@@ -2,36 +2,36 @@
 Imports System.Reflection.Emit
 
 Public Class frm_docs_anteriores
+    Private fecharPorBotao As Boolean = False ' Variável para controlar se o formulário foi fechado por um botão específico
+    'Private Sub btn_exibir_registros_Click(sender As Object, e As EventArgs)
+    '    Try
+    '       With dtg_orc
+    '           sql = $"select * from orcamentos where BINARY usuario ='{usuario_logado}'" ' BINARY para diferenciar maiusculas e minusculas
+    '           rs = db.Execute(sql)
+    '            If rs.EOF = False Then
+    '             dtg_orc.Rows.Clear() ' Limpa linhas anteriores
 
-    Private Sub btn_exibir_registros_Click(sender As Object, e As EventArgs)
-        Try
-            With dtg_orc
-                sql = $"select * from orcamentos where BINARY usuario ='{usuario_logado}'" ' BINARY para diferenciar maiusculas e minusculas
-                rs = db.Execute(sql)
-                If rs.EOF = False Then
-                    dtg_orc.Rows.Clear() ' Limpa linhas anteriores
-
-                    Do While Not rs.EOF
-                        dtg_orc.Rows.Add(
-                            rs.Fields("id").Value,
-                            rs.Fields("usuario").Value,
-                            rs.Fields("mes").Value,
-                            rs.Fields("ano").Value,
-                            rs.Fields("tipo").Value,
-                            rs.Fields("sub_tipo").Value,
-                            rs.Fields("descricao").Value,
-                            rs.Fields("valor").Value
-                        )
-                        rs.MoveNext()
-                    Loop
-                Else
-                    MsgBox("Ainda não há registros!", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "ATENÇÃO")
-                End If
-            End With
-        Catch ex As Exception
-            MsgBox("Erro de processamento!", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "ATENÇÃO")
-        End Try
-    End Sub
+    '     Do While Not rs.EOF
+    '                  dtg_orc.Rows.Add(
+    '             rs.Fields("id").Value,
+    '             rs.Fields("usuario").Value,
+    '              rs.Fields("mes").Value,
+    '             rs.Fields("ano").Value,
+    '             rs.Fields("tipo").Value,
+    '             rs.Fields("sub_tipo").Value,
+    '             rs.Fields("descricao").Value,
+    '             rs.Fields("valor").Value
+    '          )
+    '         rs.MoveNext()
+    '      Loop
+    '    Else
+    '       MsgBox("Ainda não há registros!", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "ATENÇÃO")
+    '    End If
+    '  End With
+    '  Catch ex As Exception
+    '     MsgBox("Erro de processamento!", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "ATENÇÃO")
+    'End Try
+    ' End Sub
 
     Private Sub frm_docs_anteriores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         dtg_orc.ReadOnly = True
@@ -41,8 +41,17 @@ Public Class frm_docs_anteriores
         End If
         dtg_orc.ColumnHeadersDefaultCellStyle.Font = New Font("Arial", 12, FontStyle.Italic)
         dtg_orc.DefaultCellStyle.Font = New Font("Arial", 12, FontStyle.Bold)
-
+        txt_valor.ForeColor = Color.FromArgb(48, 180, 72) ' Define a cor verde como padrão estando zerado
+        txt_valor.Text = "R$ 0,00"
+        img_simbolo.Text = "▲"
+        img_simbolo.ForeColor = Color.FromArgb(48, 180, 72)
         ' Personalização dos botões
+        dtg_orc.Columns("valor").DefaultCellStyle.Format = "C2"
+        dtg_orc.Columns("valor").DefaultCellStyle.FormatProvider = New Globalization.CultureInfo("pt-BR")
+
+        cmb_selecao_receita_despesa.DropDownStyle = ComboBoxStyle.DropDownList ' Impede a edição do ComboBox
+        cmb_selecao_receita_despesa.Items.Add("Apenas Receitas")
+        cmb_selecao_receita_despesa.Items.Add("Apenas Despesas")
         custom_buttons()
     End Sub
 
@@ -110,7 +119,59 @@ Public Class frm_docs_anteriores
     End Sub
 
     Private Sub btn_exibir_registros_Click_1(sender As Object, e As EventArgs) Handles btn_exibir_registros.Click
-        exibir_dados()
+        calc_receita_despesa = 0
+        exibir_dados() ' Chama a sub-rotina para exibir os dados no DataGridView
+        Try
+            receita = 0
+            sql = "Select * FROM orcamentos WHERE BINARY usuario='" & usuario_logado & "' AND mes='" & mes_busca & "' AND ano='" & ano_busca & "' AND tipo='Receita'"
+            rs = db.Execute(sql)
+
+            If Not rs.EOF Then
+                Do While Not rs.EOF
+                    If Not IsDBNull(rs.Fields("valor").Value) Then
+                        receita += Convert.ToDecimal(rs.Fields("valor").Value)
+                    End If
+                    rs.MoveNext()
+                Loop
+            End If
+        Catch ex As Exception
+            MsgBox("Erro ao calcular receita!", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "AVISO")
+        End Try
+
+        Try
+            despesa = 0
+            sql = "SELECT * FROM orcamentos WHERE BINARY usuario='" & usuario_logado & "' AND mes='" & mes_busca & "' AND ano='" & ano_busca & "' AND tipo='Gasto'"
+            rs = db.Execute(sql)
+
+            If Not rs.EOF Then
+                Do While Not rs.EOF
+                    If Not IsDBNull(rs.Fields("valor").Value) Then
+                        despesa += Convert.ToDecimal(rs.Fields("valor").Value)
+                    End If
+                    rs.MoveNext()
+                Loop
+            End If
+
+        Catch ex As Exception
+            MsgBox("Erro ao calcular despesa!", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "AVISO")
+        End Try
+
+        calc_receita_despesa = receita - despesa
+
+        If calc_receita_despesa < 0 Then
+            txt_valor.ForeColor = Color.FromArgb(255, 48, 97) ' Define a cor do texto como vermelho para valores negativos
+        Else
+            txt_valor.ForeColor = Color.FromArgb(48, 180, 72) ' Define a cor do texto como verde para valores positivos
+        End If
+        txt_valor.Text = $"R$ {calc_receita_despesa.ToString("F2")}" ' Formata o valor com duas casas decimais e atribui ao TextBox
+        If calc_receita_despesa < 0 Then
+            img_simbolo.Text = "▼"
+            img_simbolo.ForeColor = Color.FromArgb(255, 48, 97)
+        Else
+            img_simbolo.Text = "▲"
+            img_simbolo.ForeColor = Color.FromArgb(48, 180, 72)
+        End If
+
     End Sub
 
     Private Sub btn_alterar_reg_Click_1(sender As Object, e As EventArgs) Handles btn_alterar_reg.Click
@@ -123,7 +184,7 @@ Public Class frm_docs_anteriores
             End If
             btn_gravar.Enabled = True
             MsgBox("Campos habilitado para edição", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "AVISO")
-            MsgBox("Após alterar os dados, selecione a coluna do ID que deseja alterar os valores e clique em 'Gravar Alterações'.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "AVISO")
+            MsgBox("Após alterar os dados, selecione a coluna Do ID que deseja alterar os valores e clique em 'Gravar Alterações'.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "AVISO")
 
             dtg_orc.Columns("id").ReadOnly = True ' Mantém a coluna ID como somente leitura
             dtg_orc.Columns("usuario").ReadOnly = True ' Mantém a coluna USUÁRIO como somente leitura
@@ -142,6 +203,9 @@ Public Class frm_docs_anteriores
     End Sub
 
     Private Sub btn_data_Click(sender As Object, e As EventArgs) Handles btn_data.Click
+        txt_valor.Text = "R$ 0,00" ' Reseta o valor ao abrir o formulário de datas
+        dtg_orc.Rows.Clear() ' Limpa o DataGridView ao abrir o formulário de datas
+        cmb_selecao_receita_despesa.SelectedIndex = -1 ' Reseta o filtro ao abrir o formulário de datas
         form_buscar_data.Show() ' Formulario para inserir as datas desejadas
     End Sub
 
@@ -154,75 +218,13 @@ Public Class frm_docs_anteriores
         Me.Show() ' Abre o formulário de relatório
     End Sub
 
-    Private Sub btn_gravar_Click(sender As Object, e As EventArgs)
-        Dim listaMeses As New List(Of String) From {
-            "Janeiro",
-            "Fevereiro",
-            "Março",
-            "Abril",
-            "Maio",
-            "Junho",
-            "Julho",
-            "Agosto",
-            "Setembro",
-            "Outubro",
-            "Novembro",
-            "Dezembro"
-            }
-        Dim tipo_gasto As New List(Of String) From {
-            "Alimentação",
-            "Transporte",
-            "Saúde",
-            "Educação",
-            "Lazer",
-            "Moradia",
-            "Outros"
-            }
-        Dim tipo_receita As New List(Of String) From {
-            "Salário",
-            "Freelance",
-            "Investimentos",
-            "Presente",
-            "Outros Rendimentos"
-            }
-        If dtg_orc.CurrentCell.OwningColumn.Name <> "id" Then
-            MsgBox("Selecione a coluna ID para gravar as alterações.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "ATENÇÃO")
-            Exit Sub
-        End If
-
-
-        If listaMeses.Contains(dtg_orc.CurrentRow.Cells("mes").Value.ToString()) = False Then
-            MsgBox("Mês inválido. Por favor, insira um mês válido.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "ATENÇÃO")
-            exibir_dados() ' Recarrega os dados originais
-            Exit Sub
-        End If
-        If Not IsNumeric(dtg_orc.CurrentRow.Cells("ano").Value) OrElse CInt(dtg_orc.CurrentRow.Cells("ano").Value) < 1900 OrElse CInt(dtg_orc.CurrentRow.Cells("ano").Value) > DateTime.Now.Year Then
-            MsgBox("Ano inválido. Por favor, insira um ano válido entre 2015 e o ano atual.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "ATENÇÃO")
-            exibir_dados() ' Recarrega os dados originais
-            Exit Sub
-        End If
-        If dtg_orc.CurrentRow.Cells("tipo").Value.ToString() <> "Receita" AndAlso dtg_orc.CurrentRow.Cells("tipo").Value.ToString() <> "Gasto" Then
-            MsgBox("Tipo inválido. Por favor, insira 'Receita' ou 'Gasto'.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "ATENÇÃO")
-            exibir_dados() ' Recarrega os dados originais
-            Exit Sub
-        End If
-        If tipo_gasto.Contains(dtg_orc.CurrentRow.Cells("sub_tipo").Value.ToString()) = False AndAlso tipo_receita.Contains(dtg_orc.CurrentRow.Cells("sub_tipo").Value.ToString()) = False Then
-            MsgBox("Subtipo inválido. Por favor, insira um subtipo válido.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "ATENÇÃO")
-            exibir_dados() ' Recarrega os dados originais
-            Exit Sub
-        End If
-
-        sql = $"update orcamentos set usuario='{dtg_orc.CurrentRow.Cells("usuario").Value}', mes='{dtg_orc.CurrentRow.Cells("mes").Value}', ano='{dtg_orc.CurrentRow.Cells("ano").Value}', tipo='{dtg_orc.CurrentRow.Cells("tipo").Value}', sub_tipo='{dtg_orc.CurrentRow.Cells("sub_tipo").Value}', descricao='{dtg_orc.CurrentRow.Cells("descricao").Value}', valor='{dtg_orc.CurrentRow.Cells("valor").Value}' where id={dtg_orc.CurrentRow.Cells("id").Value}"
-        rs = db.Execute(sql)
-        MsgBox("Alterações gravadas com sucesso!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "AVISO")
-        dtg_orc.ReadOnly = True
-    End Sub
 
     Private Sub btn_voltar_Click(sender As Object, e As EventArgs) Handles btn_voltar.Click
         mes_busca = "" ' Limpa a variável global de mês
         ano_busca = "" ' Limpa a variável global de ano
-        Me.Close()
+        fecharPorBotao = True
         frm_tela_principal.Show() ' Volta para o formulário principal
+        Me.Close()
     End Sub
 
     Private Sub dtg_orc_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dtg_orc.CellContentClick
@@ -234,9 +236,165 @@ Public Class frm_docs_anteriores
             ' Fechado pelo botão Voltar, não faz nada
         Else
             ' Fechado por outro meio, fecha o programa
-            Application.Exit()
+            frm_tela_principal.Show()
         End If
 
+    End Sub
+
+    Private Sub btn_gravar_Click_1(sender As Object, e As EventArgs) Handles btn_gravar.Click
+        Dim listaMeses As New List(Of String) From {
+        "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+        "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+    }
+        Dim tipo_gasto As New List(Of String) From {
+        "Alimentação", "Transporte", "Saúde", "Educação", "Lazer", "Moradia", "Outros"
+    }
+        Dim tipo_receita As New List(Of String) From {
+        "Salário", "Freelance", "Investimentos", "Presente", "Outros Rendimentos"
+    }
+
+        If dtg_orc.CurrentCell.OwningColumn.Name <> "id" Then
+            MsgBox("Selecione a coluna ID para gravar as alterações.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "ATENÇÃO")
+            Exit Sub
+        End If
+
+        If listaMeses.Contains(dtg_orc.CurrentRow.Cells("mes").Value.ToString()) = False Then
+            MsgBox("Mês inválido. Por favor, insira um mês válido.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "ATENÇÃO")
+            exibir_dados()
+            Exit Sub
+        End If
+
+        If Not IsNumeric(dtg_orc.CurrentRow.Cells("ano").Value) OrElse
+        CInt(dtg_orc.CurrentRow.Cells("ano").Value) < 1900 OrElse
+        CInt(dtg_orc.CurrentRow.Cells("ano").Value) > DateTime.Now.Year Then
+
+            MsgBox("Ano inválido. Por favor, insira um ano válido entre 2015 e o ano atual.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "ATENÇÃO")
+            exibir_dados()
+            Exit Sub
+        End If
+
+        If dtg_orc.CurrentRow.Cells("tipo").Value.ToString() <> "Receita" AndAlso
+       dtg_orc.CurrentRow.Cells("tipo").Value.ToString() <> "Gasto" Then
+
+            MsgBox("Tipo inválido. Por favor, insira 'Receita' ou 'Gasto'.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "ATENÇÃO")
+            exibir_dados()
+            Exit Sub
+        End If
+
+        If tipo_gasto.Contains(dtg_orc.CurrentRow.Cells("sub_tipo").Value.ToString()) = False AndAlso
+       tipo_receita.Contains(dtg_orc.CurrentRow.Cells("sub_tipo").Value.ToString()) = False Then
+
+            MsgBox("Subtipo inválido. Por favor, insira um subtipo válido.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "ATENÇÃO")
+            exibir_dados()
+            Exit Sub
+        End If
+
+        ' Garante que a edição atual seja confirmada
+        dtg_orc.EndEdit()
+        dtg_orc.CommitEdit(DataGridViewDataErrorContexts.Commit)
+
+        ' Tratamento para evitar DBNull ou Nothing
+        Dim usuario = If(IsDBNull(dtg_orc.CurrentRow.Cells("usuario").Value), "", dtg_orc.CurrentRow.Cells("usuario").Value.ToString())
+        Dim mes = dtg_orc.CurrentRow.Cells("mes").Value.ToString()
+        Dim ano = dtg_orc.CurrentRow.Cells("ano").Value.ToString()
+        Dim tipo = dtg_orc.CurrentRow.Cells("tipo").Value.ToString()
+        Dim sub_tipo = dtg_orc.CurrentRow.Cells("sub_tipo").Value.ToString()
+        Dim descricao = If(IsDBNull(dtg_orc.CurrentRow.Cells("descricao").Value), "", dtg_orc.CurrentRow.Cells("descricao").Value.ToString())
+        Dim valor = If(IsDBNull(dtg_orc.CurrentRow.Cells("valor").Value), 0, dtg_orc.CurrentRow.Cells("valor").Value.ToString())
+        Dim id = dtg_orc.CurrentRow.Cells("id").Value.ToString()
+
+        sql = $"UPDATE orcamentos SET usuario='{usuario}', mes='{mes}', ano='{ano}', tipo='{tipo}', sub_tipo='{sub_tipo}', descricao='{descricao}', valor='{valor}' WHERE id={id}"
+        rs = db.Execute(sql)
+
+        MsgBox("Alterações gravadas com sucesso!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "AVISO")
+        dtg_orc.ReadOnly = True
+    End Sub
+
+    Private Sub cmb_selecao_receita_despesa_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmb_selecao_receita_despesa.SelectedIndexChanged
+        If cmb_selecao_receita_despesa.SelectedIndex = 0 Then
+            If mes_busca = "" Or ano_busca = "" Then
+                MsgBox("Mês ou ano não selecionados!", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "ATENÇÃO")
+                Exit Sub
+            End If
+            Try
+                With dtg_orc
+                    sql = $"select * from orcamentos where BINARY usuario ='{usuario_logado}' and tipo = 'Receita' and mes = '{mes_busca}' and ano='{ano_busca}'" ' BINARY para diferenciar maiusculas e minusculas
+                    rs = db.Execute(sql)
+                    If Not rs.EOF Then
+                        dtg_orc.Rows.Clear()
+                        receita = 0D ' Zera antes de somar
+                        Do While Not rs.EOF
+                            dtg_orc.Rows.Add(
+                                rs.Fields("id").Value,
+                                rs.Fields("usuario").Value,
+                                rs.Fields("mes").Value,
+                                rs.Fields("ano").Value,
+                                rs.Fields("tipo").Value,
+                                rs.Fields("sub_tipo").Value,
+                                rs.Fields("descricao").Value,
+                                rs.Fields("valor").Value
+                            )
+
+                            ' Soma receita aqui mesmo
+                            If Not IsDBNull(rs.Fields("valor").Value) Then
+                                receita += Convert.ToDecimal(rs.Fields("valor").Value)
+                            End If
+
+                            rs.MoveNext()
+                        Loop
+                    Else
+                        MsgBox("Ainda não há registros de receitas!", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "ATENÇÃO")
+                    End If
+                End With
+            Catch ex As Exception
+                MsgBox("Erro de processamento!", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "ATENÇÃO")
+            End Try
+            txt_valor.Text = "R$ " & receita.ToString("F2") ' Exibe o total das receitas no TextBox
+            txt_valor.ForeColor = Color.FromArgb(48, 180, 72) ' Define a cor do texto como verde para valores positivos
+        ElseIf cmb_selecao_receita_despesa.SelectedIndex = 1 Then ' Apenas despesas
+            If mes_busca = "" Or ano_busca = "" Then ' Verifica se o mês e ano foram selecionados
+                MsgBox("Mês ou ano não selecionados!", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "ATENÇÃO")
+                Exit Sub
+            End If
+            Try
+                With dtg_orc
+                    sql = $"select * from orcamentos where BINARY usuario ='{usuario_logado}' and tipo = 'Gasto' and mes = '{mes_busca}' and ano='{ano_busca}'" ' BINARY para diferenciar maiusculas e minusculas
+                    rs = db.Execute(sql)
+                    If Not rs.EOF Then
+                        dtg_orc.Rows.Clear()
+                        despesa = 0D ' Zera antes de somar
+                        Do While Not rs.EOF
+                            dtg_orc.Rows.Add(
+                                rs.Fields("id").Value,
+                                rs.Fields("usuario").Value,
+                                rs.Fields("mes").Value,
+                                rs.Fields("ano").Value,
+                                rs.Fields("tipo").Value,
+                                rs.Fields("sub_tipo").Value,
+                                rs.Fields("descricao").Value,
+                                rs.Fields("valor").Value
+                            )
+
+                            ' Soma despesas aqui mesmo
+                            If Not IsDBNull(rs.Fields("valor").Value) Then
+                                despesa += Convert.ToDecimal(rs.Fields("valor").Value)
+                            End If
+
+                            rs.MoveNext()
+                        Loop
+                    Else
+                        MsgBox("Ainda não há registros de despesas!", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "ATENÇÃO")
+                    End If
+
+                    txt_valor.Text = "R$ " & despesa.ToString("F2")
+                End With
+            Catch ex As Exception
+                MsgBox("Erro de processamento!", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "ATENÇÃO")
+            End Try
+            txt_valor.Text = "R$ " & despesa.ToString("F2") ' Exibe o total das despesas no TextBox
+            txt_valor.ForeColor = Color.FromArgb(255, 48, 97) ' Define a cor do texto como vermelho para valores negativos
+
+        End If
     End Sub
 End Class
 

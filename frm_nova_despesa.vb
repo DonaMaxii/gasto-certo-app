@@ -1,4 +1,5 @@
 ﻿Public Class Frm_nova_despesa
+    Private fecharPorBotao As Boolean = False ' Variável para controlar se o formulário foi fechado por um botão específico
     Private Sub Form_gasto_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         cmb_box_tipo.Items.Add("Alimentação")
         cmb_box_tipo.Items.Add("Transporte")
@@ -17,6 +18,7 @@
         AddHandler btn_orcamento.MouseLeave, AddressOf botao_MouseLeave
         AddHandler btn_sair.MouseEnter, AddressOf botao_MouseEnter
         AddHandler btn_sair.MouseLeave, AddressOf botao_MouseLeave
+        nome_user_global(lbl_usuario)
     End Sub
 
     Private Sub Btn_registrar_Click(sender As Object, e As EventArgs)
@@ -55,8 +57,9 @@
 
             rs = db.Execute(sql)
             MsgBox("Receita registrada com sucesso!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "AVISO")
-            Me.Close()
+            fecharPorBotao = True
             frm_novo_orcamento_tipo.Show()
+            Me.Close()
         Catch ex As Exception
             MsgBox("Erro ao registrar a receita!", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "ALERTA")
         End Try
@@ -71,31 +74,31 @@
     End Sub
 
     Private Sub btn_inicio_Click(sender As Object, e As EventArgs) Handles btn_inicio.Click
-        Me.Close()
+        fecharPorBotao = True
         frm_tela_principal.Show()
+        Me.Close()
     End Sub
 
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs)
         resp = MsgBox("Desejá realmente sair da sua conta?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "ALERTA")
         If resp = vbYes Then
-            Me.Close()
+            fecharPorBotao = True
             frm_login.Show()
+            Me.Close()
         Else
         End If
     End Sub
 
     Private Sub btn_voltar_Click(sender As Object, e As EventArgs)
-        Me.Close()
+        fecharPorBotao = True
         frm_novo_orcamento_tipo.Show()
-    End Sub
-
-    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs)
-
+        Me.Close()
     End Sub
 
     Private Sub btn_voltar_Click_1(sender As Object, e As EventArgs) Handles btn_voltar.Click
-        Me.Close()
+        fecharPorBotao = True
         frm_novo_orcamento_tipo.Show()
+        Me.Close()
     End Sub
 
     Private Sub btn_registrar_Click_1(sender As Object, e As EventArgs) Handles btn_registrar.Click
@@ -134,28 +137,24 @@
 
             rs = db.Execute(sql)
             MsgBox("Receita registrada com sucesso!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "AVISO")
-            Me.Close()
+            fecharPorBotao = True
             frm_novo_orcamento_tipo.Show()
+            Me.Close()
         Catch ex As Exception
             MsgBox("Erro ao registrar a receita!", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "ALERTA")
         End Try
     End Sub
 
     Private Sub Frm_nova_despesa_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
-        If btn_voltar.Focused Then
-            ' Fechado pelo botão Voltar, não faz nada
-        ElseIf btn_inicio.Focused Then
-            ' Fechado pelo botão Início, não faz nada
-        ElseIf btn_registrar.Focused Then
-            ' Fechado pelo botão Registrar, não faz nada
+        If fecharPorBotao Then
+
         Else
-            ' Fechado por outro motivo, sai da aplicação
+            MsgBox("Encerrando o programa!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "AVISO")
             Application.Exit()
         End If
-
     End Sub
 
     Private Sub btn_doc_anteriores_Click(sender As Object, e As EventArgs) Handles btn_doc_anteriores.Click
-
+        frm_docs_anteriores.Show()
     End Sub
 End Class

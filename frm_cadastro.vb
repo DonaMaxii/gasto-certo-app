@@ -1,5 +1,6 @@
 ﻿Public Class form_cadastro
     Private senha_visivel As Boolean = False
+    Private fecharPorBotao As Boolean = False ' Variável para controlar se o formulário foi fechado por um botão específico
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btn_voltar.Click
         frm_login.Show()
         Me.Close() ' Fecha o formulário de cadastro
@@ -64,18 +65,11 @@
         End If
     End Sub
 
-    Private Sub txt_senha_TextChanged(sender As Object, e As EventArgs) Handles txt_senha.TextChanged
-
-    End Sub
 
     Private Sub txt_senha_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_senha.KeyDown
         If e.KeyCode = Keys.Enter Then
             txt_confirmar_senha.Focus()
         End If
-    End Sub
-
-    Private Sub txt_confirmar_senha_TextChanged(sender As Object, e As EventArgs) Handles txt_confirmar_senha.TextChanged
-
     End Sub
 
     Private Sub txt_confirmar_senha_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_confirmar_senha.KeyDown

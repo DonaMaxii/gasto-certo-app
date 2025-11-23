@@ -137,10 +137,6 @@ Public Class frm_login
         End If
     End Sub
 
-    Private Sub Tela_Click(sender As Object, e As EventArgs) Handles Tela.Click
-
-    End Sub
-
     Private Sub btn_cadastrar_Click(sender As Object, e As EventArgs) Handles btn_cadastrar.Click
         txt_user.Clear()
         txt_password.Clear()
@@ -151,10 +147,6 @@ Public Class frm_login
     Private Sub frm_login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         conecta_banco_mysql()
         Me.Visible = True ' Garante que o formulário esteja visível ao carregar
-    End Sub
-
-    Private Sub txt_user_TextChanged(sender As Object, e As EventArgs) Handles txt_user.TextChanged
-
     End Sub
 
     Private Sub txt_user_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_user.KeyDown

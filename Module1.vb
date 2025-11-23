@@ -11,7 +11,6 @@ Module Module1
     Public mes_busca, ano_busca As String ' Variáveis para armazenar o mês e ano selecionados na busca'
     Public habilitado As Integer = 0 ' Variável para controlar se a edição está habilitada ou não no DataGridView principal
     Public calc_receita_despesa, receita, despesa As Double ' Variável para armazenar o resultado do cálculo de receitas menos despesas
-
     Sub conecta_banco_mysql()
         Try
             db = CreateObject("ADODB.Connection")

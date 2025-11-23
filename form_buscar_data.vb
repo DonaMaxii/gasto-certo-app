@@ -1,5 +1,7 @@
 ﻿Public Class form_buscar_data
+    Private fecharPorBotao As Boolean = False ' Variável para controlar se o formulário foi fechado por um botão específico
     Private Sub form_buscar_data_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         cmb_meses.Items.Add("Janeiro") ' Adiciona os meses ao ComboBox
         cmb_meses.Items.Add("Fevereiro")
         cmb_meses.Items.Add("Março")
@@ -23,8 +25,9 @@
     End Sub
 
     Private Sub btn_cancel_Click(sender As Object, e As EventArgs) Handles btn_cancel.Click
-        Me.Close()
+        fecharPorBotao = True
         frm_docs_anteriores.Show()
+        Me.Close()
     End Sub
 
     Private Sub btn_consultar_Click(sender As Object, e As EventArgs) Handles btn_consultar.Click
@@ -34,8 +37,9 @@
         End If
         mes_busca = cmb_meses.Text ' Armazena o mês selecionado na variável global "mes"
         ano_busca = cmb_ano.Text ' Armazena o ano selecionado na variável global "ano"
-        Me.Close()
+        fecharPorBotao = True
         frm_docs_anteriores.Show() ' Formulario de exibição
+        Me.Close()
     End Sub
 
     Private Sub btn_sair_Click(sender As Object, e As EventArgs) Handles btn_sair.Click
@@ -46,16 +50,12 @@
     End Sub
 
     Private Sub form_buscar_data_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
-        If btn_consultar.Focused Or btn_cancelar.Focused Then
-            ' Não faz nada, pois o fechamento foi intencional
-            Exit Sub
+        If fecharPorBotao Then
         Else
+            MsgBox("Encerrando o programa!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "AVISO")
             Application.Exit()
         End If
 
     End Sub
 
-    Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
-
-    End Sub
 End Class
